@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7COpen+Sans:400,400i,600,700'
+          rel='stylesheet'>
+
+    <!-- Css -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/font-icons.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/sliders.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('img/apple-touch-icon-114x114.png') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    <!-- Preloader -->
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <main class="main-wrapper">
+
+        {# Header du Site #}
+        {% include 'components/_header.html.twig' %}
+
+        {# Fil d'Ariane #}
+        {% block breadcrumb '' %}
+
+        <div class="content-wrapper oh">
+
+            {# Contenu du Site #}
+            {% block content '' %}
+
+            {# Pied de Page #}
+            {% include "components/_footer.html.twig" %}
+
+        </div>
+
+    </main>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <!-- jQuery Scripts -->
+    <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01-CREATION D&#x27;UN PROJET SF 3</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="découvrir-symfony-3.4">Découvrir Symfony 3.4</h1>
+<blockquote>
+<p>PDF SF3C1 : <strong>Page 1</strong></p>
+</blockquote>
+<h1 id="installation-de-symfony-3.4">Installation de Symfony 3.4</h1>
+<p><a href="https://symfony.com/doc/3.4/index.html">https://symfony.com/doc/3.4/index.html</a><br>
+Suivi des étapes de setup : <a href="https://symfony.com/doc/3.4/setup.html">https://symfony.com/doc/3.4/setup.html</a></p>
+<h2 id="pré-requis">Pré-requis</h2>
+<ul>
+<li>Version PHP <strong>: 7.1</strong> (recommandé), 5.5 minimum</li>
+<li>Extensions PHP : xdebug, pdo_sqlite, intl, openssl</li>
+<li>IDE : <strong>PHPStorm</strong> (recommandé), Netbeans ou autre IDE</li>
+<li>Pour les utilisateurs Windows : <a href="http://cmder.net/">cmder</a></li>
+</ul>
+<h2 id="installation-simple-grâce-au-symfony-installer-">Installation simple grâce au Symfony Installer :</h2>
+<p>Symfony fournit une application dédiée <strong>Symfony Installer</strong> qui nous permet de mettre en place / installer rapidement notre projet.</p>
+<h3 id="mise-en-place-du-symfony-installer">Mise en place du Symfony Installer</h3>
+<p>Dans votre terminal windows à la racine de votre projet, par exemple <code>C:\wamp64\www\symfony</code> :</p>
+<pre><code>php -r "file_put_contents('symfony', file_get_contents('https://symfony.com/installer'));"
+</code></pre>
+<blockquote>
+<p>Cette installation ne se fait qu’un seule fois pour votre projet.</p>
+</blockquote>
+<p>Si tous s’est bien passé, vous devriez voir un fichier <code>symfony</code> dans votre dossier.<br>
+Pour vérifier le fonctionnement de votre <strong>Symfony Installer</strong> vous pouvez lancer la commande suivante :</p>
+<pre><code>php symfony
+</code></pre>
+<h3 id="création-du-projet">Création du Projet</h3>
+<p>La création de notre projet est ensuite simplifié.<br>
+Toujours dans notre terminal :</p>
+<pre><code>php symfony new zenna 3.4
+</code></pre>
+<p>Si tous s’est bien passé, vous devriez voir dans votre terminal :</p>
+<pre><code>OK  Symfony 3.4.8 was successfully installed
+</code></pre>
+<h4 id="composer">Composer</h4>
+<p>Vous pouvez également utiliser <code>composer</code> pour créer votre projet.</p>
+<blockquote>
+<p>Doc de Référence :<br>
+<a href="https://symfony.com/doc/3.4/setup.html#creating-symfony-applications-with-composer">https://symfony.com/doc/3.4/setup.html#creating-symfony-applications-with-composer</a></p>
+</blockquote>
+<p>Composer est un gestionnaire de dépendance qui vous permettra de définir les différentes dépendances pour votre projet. Composer utilise un fichier composer.json qui contient plusieurs informations sur le projet dont la liste des librairies utilisées. Il est ensuite capable de télécharger automatiquement ces librairies (et les dépendances associées) et de générer un autoloader pour les utiliser simplement dans vos projets PHP.</p>
+<h3 id="packagist">Packagist</h3>
+<p>Packagist est le repository principal de Composer. Il intègre des packages public installable à partir de Composer.</p>
+<h3 id="ssl-certificate-problem">SSL certificate problem</h3>
+<p>Si vous avez une erreur du type :</p>
+<pre><code>[GuzzleHttp\Exception\RequestException]
+cURL error 60: SSL certificate problem: unable to get local issuer certificate
+</code></pre>
+<p>Les certificats ne sont pas correctement installé sur votre système.</p>
+<ol>
+<li>Créez un dossier <code>certs</code> dans votre serveur web local. Exemple : <code>C:\wamp64\certs</code></li>
+<li>Téléchargez la liste des derniers certificats : <a href="https://curl.haxx.se/ca/cacert.pem">https://curl.haxx.se/ca/cacert.pem</a></li>
+<li>Déplacer le fichier téléchargé <code>cacert.pem</code> dans votre dossier <code>certs</code></li>
+<li>Mettez à jour votre fichier <code>php.ini</code></li>
+</ol>
+<p>Pour mettre à jour votre fichier <code>php.ini</code> vous devez repérer votre version de PHP.<br>
+Dans votre terminal <code>php -v</code>, ensuite dans votre dossier php correspondant, localisez votre fichier <code>php.ini</code> puis modifier la ligne suivante :</p>
+<pre><code>curl.cainfo = "C:\path\to\cacert.pem"
+</code></pre>
+<p>Par Exemple :</p>
+<pre><code>curl.cainfo = "C:\wamp64\certs\cacert.pem"
+</code></pre>
+<h3 id="lancement-du-serveur">Lancement du Serveur</h3>
+<p>Vous avez dû remarquer, Symfony viens avec un serveur PHP embarqué.<br>
+Vous pouvez l’utiliser directement si vous le souhaitez en lieu et place de votre serveur WAMP.</p>
+<pre><code> cd zenna
+ php bin/console server:run
+</code></pre>
+<h3 id="ouverture-dans-le-navigateur">Ouverture dans le navigateur</h3>
+<p><strong>Symfony Installer</strong> à installé pour nous automatiquement toute l’architecture de Symfony.<br>
+Nous n’avons plus qu’à nous rendre sur notre URL de développement :</p>
+<blockquote>
+<p><a href="http://localhost:8000/">http://localhost:8000/</a></p>
+</blockquote>
+<h3 id="barre-de-débogage">Barre de Débogage</h3>
+<p>Observez la barre de débogage. Au fur et à mesure que nous installerons de nouveaux packages, nous verrons de nouvelles options apparaître.</p>
+<blockquote>
+<p>Petit tour de découverte des options de la barre.</p>
+</blockquote>
+<h3 id="installation-et-configuration-du-plugin-symfony-pour-phpstorm">Installation et Configuration du Plugin Symfony pour PHPStorm</h3>
+<p>Le plugin symfony pour PHPStorm permettra à notre IDE de reconnaître toutes les fonctionnalités de Symfony.</p>
+<p><strong>Nous allons installer :</strong></p>
+<ol>
+<li>PHP Annotations<br>
+<img src="https://github.com/biynmedia/Formation-Symfony/blob/master/LES-FONDAMENTAUX/captures/plugin%20annotation.png?raw=true" alt="enter image description here"></li>
+<li>PHP Toolbox<br>
+<img src="https://github.com/biynmedia/Formation-Symfony/blob/master/LES-FONDAMENTAUX/captures/plugin%20toolbox.png?raw=true" alt="enter image description here"></li>
+<li>Symfony Plugin<br>
+<img src="https://raw.githubusercontent.com/biynmedia/Formation-Symfony/master/LES-FONDAMENTAUX/captures/plugin%20symfony.png" alt="enter image description here"></li>
+</ol>
+<blockquote>
+<p>Nous pouvons ensuite activer le plugin et redémarrer PHPStorm.<br>
+PS : Vérifiez que <strong>App Directory</strong> pointe sur le dossier <strong>app</strong> et <strong>WebDirectory</strong> sur le dossier <strong>web</strong></p>
+</blockquote>
+<h3 id="découvrir-larchitecture-de-sf3">Découvrir l’Architecture de SF3</h3>
+<blockquote>
+<p>Doc de Référence : <a href="https://symfony.com/doc/3.4/page_creation.html#checking-out-the-project-structure">https://symfony.com/doc/3.4/page_creation.html#checking-out-the-project-structure</a> | Voir aussi le PDF SF3C1 : <strong>Page 65</strong></p>
+</blockquote>
+<p>Written with ❤️ by <a href="https://github.com/hugoliegeard">Hugo LIEGEARD</a>.<br>
+Screenshots 📸 by <a href="https://tool.frogg.fr/">Frogg’s web tools</a>.</p>
+</div>
+</body>
+
+</html>

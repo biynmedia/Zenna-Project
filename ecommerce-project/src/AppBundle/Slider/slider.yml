@@ -1,0 +1,28 @@
+slides:
+    slide1 :
+        image : 'img/hero/1.jpg'
+        title : 'A Summer Story'
+        subtitle : 'Le plein de nouveautés !'
+        links :
+            link1 :
+                title : 'Découvrez la campagne'
+                href : '#'
+    slide2 :
+        image : 'img/hero/2.jpg'
+        title : 'Spring Getaway'
+        subtitle : 'Trend Alert'
+        links :
+            link1 :
+                title : 'Voir la collection'
+                href : '#'
+            link2 :
+                title: 'Découvrez la sélection'
+                href : '#'
+    slide3 :
+        image : 'img/hero/3.jpg'
+        title : 'Look of the Week'
+        subtitle : 'La Zenna sélection !'
+        links :
+            link1 :
+                title : "J'en profite vite !"
+                href : '#'

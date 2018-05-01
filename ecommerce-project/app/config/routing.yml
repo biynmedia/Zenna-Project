@@ -1,0 +1,21 @@
+# : https://symfony.com/doc/3.4/routing.html#loading-routes
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+zenna_index:
+    path:     /
+    defaults: { _controller: AppBundle:Zenna\Zenna:index }
+
+zenna_accueil:
+    path: /accueil
+    controller: FrameworkBundle:Redirect:redirect
+    defaults:
+        route: zenna_index
+        permanent: true
+
+mentions_legales:
+    path: /mentions-legales
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    static/mentionslegales.html.twig

@@ -1,0 +1,25 @@
+{% if title is not empty %}
+    <!-- Page Title -->
+    <section class="page-title text-center bg-light">
+        <div class="container relative clearfix">
+            <div class="title-holder">
+                <div class="title-text">
+                    <h1 class="uppercase">{{ title }}</h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="{{ path('zenna_index') }}">Accueil</a>
+                        </li>
+                        {% for link in links %}
+                            <li>
+                                <a href="{{ path('zenna_category', { 'category' : link.category }) }}">{{ link.title }}</a>
+                            </li>
+                        {% endfor %}
+                        <li class="active">
+                            {{ title }}
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}

@@ -1,0 +1,349 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}
+    Accueil
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Slider -->
+    <section class="hero-wrap text-center relative">
+        <div id="owl-hero" class="owl-carousel owl-theme light-arrows slider-animated">
+            {% for slide in slides %}
+                <div class="hero-slide overlay" style="background-image:url({{ slide.image }})">
+                    <div class="container">
+                        <div class="hero-holder">
+                            <div class="hero-message">
+                                <h1 class="hero-title nocaps">{{ slide.title }}</h1>
+                                <h2 class="hero-subtitle lines">{{ slide.subtitle }}</h2>
+                                <div class="buttons-holder">
+                                    {% for key, link in slide.links %}
+                                        <a href="{{ link.href }}" class="btn btn-lg btn-color"><span>{{ link.title }}</span></a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section> <!-- end hero slider -->
+
+    <!-- Trendy Products -->
+    <section class="section-wrap-sm new-arrivals pb-50 mt-50">
+        <div class="container">
+
+            <div class="row heading-row">
+                <div class="col-md-12 text-center">
+                    <span class="subheading">Des vêtements et de la mode</span>
+                    <h2 class="heading bottom-line">
+                        Les Nouveautés
+                    </h2>
+                </div>
+            </div>
+
+            <div class="row items-grid">
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="product-item hover-trigger">
+                        <div class="product-img">
+                            <a href="#">
+                                <img src="img/shop/shop_item_1.jpg" alt="">
+                            </a>
+                            <div class="product-label">
+                                <span class="sale">top</span>
+                            </div>
+                            <div class="hover-overlay">
+                                <div class="product-actions">
+                                    <a href="#" class="product-add-to-wishlist">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </div>
+                                <div class="product-details valign">
+                      <span class="category">
+                        <a href="#">Women</a>
+                      </span>
+                                    <h3 class="product-title">
+                                        <a href="#">Drawstring Dress</a>
+                                    </h3>
+                                    <span class="price">
+                        <del>
+                          <span>$730.00</span>
+                        </del>
+                        <ins>
+                          <span class="amount">$399.99</span>
+                        </ins>
+                      </span>
+                                    <div class="btn-quickview">
+                                        <a href="#" class="btn btn-md btn-color">
+                                            <span>Aperçu</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="product-item hover-trigger">
+                        <div class="product-img">
+                            <a href="#">
+                                <img src="img/shop/shop_item_2.jpg" alt="">
+                            </a>
+                            <div class="hover-overlay">
+                                <div class="product-actions">
+                                    <a href="#" class="product-add-to-wishlist">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </div>
+                                <div class="product-details valign">
+                      <span class="category">
+                        <a href="#">Accessories</a>
+                      </span>
+                                    <h3 class="product-title">
+                                        <a href="#">Mesh Sandal</a>
+                                    </h3>
+                                    <span class="price">
+                        <ins>
+                          <span class="amount">$190.00</span>
+                        </ins>
+                      </span>
+                                    <div class="btn-quickview">
+                                        <a href="#" class="btn btn-md btn-color">
+                                            <span>Aperçu</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="product-item hover-trigger">
+                        <div class="product-img">
+                            <a href="#">
+                                <img src="img/shop/shop_item_3.jpg" alt="">
+                            </a>
+                            <div class="hover-overlay">
+                                <div class="product-actions">
+                                    <a href="#" class="product-add-to-wishlist">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </div>
+                                <div class="product-details valign">
+                      <span class="category">
+                        <a href="#">Women</a>
+                      </span>
+                                    <h3 class="product-title">
+                                        <a href="#">Tribal Grey Blazer</a>
+                                    </h3>
+                                    <span class="price">
+                        <ins>
+                          <span class="amount">$330.00</span>
+                        </ins>
+                      </span>
+                                    <div class="btn-quickview">
+                                        <a href="#" class="btn btn-md btn-color">
+                                            <span>Aperçu</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="product-item hover-trigger">
+                        <div class="product-img">
+                            <a href="#">
+                                <img src="img/shop/shop_item_4.jpg" alt="">
+                            </a>
+                            <div class="hover-overlay">
+                                <div class="product-actions">
+                                    <a href="#" class="product-add-to-wishlist">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </div>
+                                <div class="product-details valign">
+                      <span class="category">
+                        <a href="#">Men</a>
+                      </span>
+                                    <h3 class="product-title">
+                                        <a href="#">Sweater w/ Colar</a>
+                                    </h3>
+                                    <span class="price">
+                        <ins>
+                          <span class="amount">$299.00</span>
+                        </ins>
+                      </span>
+                                    <div class="btn-quickview">
+                                        <a href="#" class="btn btn-md btn-color">
+                                            <span>Aperçu</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="product-item hover-trigger">
+                        <div class="product-img">
+                            <a href="#">
+                                <img src="img/shop/shop_item_5.jpg" alt="">
+                            </a>
+                            <div class="hover-overlay">
+                                <div class="product-actions">
+                                    <a href="#" class="product-add-to-wishlist">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </div>
+                                <div class="product-details valign">
+                      <span class="category">
+                        <a href="#">Women</a>
+                      </span>
+                                    <h3 class="product-title">
+                                        <a href="#">Lola May Crop Blazer</a>
+                                    </h3>
+                                    <span class="price">
+                        <ins>
+                          <span class="amount">$42.00</span>
+                        </ins>
+                      </span>
+                                    <div class="btn-quickview">
+                                        <a href="#" class="btn btn-md btn-color">
+                                            <span>Aperçu</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="product-item hover-trigger">
+                        <div class="product-img">
+                            <a href="#">
+                                <img src="img/shop/shop_item_6.jpg" alt="">
+                            </a>
+                            <div class="product-label">
+                                <span class="sale">top</span>
+                            </div>
+                            <div class="hover-overlay">
+                                <div class="product-actions">
+                                    <a href="#" class="product-add-to-wishlist">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </div>
+                                <div class="product-details valign">
+                      <span class="category">
+                        <a href="#">Men</a>
+                      </span>
+                                    <h3 class="product-title">
+                                        <a href="#">Faux Suits</a>
+                                    </h3>
+                                    <span class="price">
+                        <del>
+                          <span>$500.00</span>
+                        </del>
+                        <ins>
+                          <span class="amount">$233.00</span>
+                        </ins>
+                      </span>
+                                    <div class="btn-quickview">
+                                        <a href="#" class="btn btn-md btn-color">
+                                            <span>Aperçu</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="product-item hover-trigger">
+                        <div class="product-img">
+                            <a href="#">
+                                <img src="img/shop/shop_item_7.jpg" alt="">
+                            </a>
+                            <div class="hover-overlay">
+                                <div class="product-actions">
+                                    <a href="#" class="product-add-to-wishlist">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </div>
+                                <div class="product-details valign">
+                      <span class="category">
+                        <a href="#">Accessories</a>
+                      </span>
+                                    <h3 class="product-title">
+                                        <a href="#">Crew Watch</a>
+                                    </h3>
+                                    <span class="price">
+                        <ins>
+                          <span class="amount">$280.00</span>
+                        </ins>
+                      </span>
+                                    <div class="btn-quickview">
+                                        <a href="#" class="btn btn-md btn-color">
+                                            <span>Aperçu</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="product-item hover-trigger">
+                        <div class="product-img">
+                            <a href="#">
+                                <img src="img/shop/shop_item_8.jpg" alt="">
+                            </a>
+                            <div class="hover-overlay">
+                                <div class="product-actions">
+                                    <a href="#" class="product-add-to-wishlist">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </div>
+                                <div class="product-details valign">
+                      <span class="category">
+                        <a href="#">Women</a>
+                      </span>
+                                    <h3 class="product-title">
+                                        <a href="#">Jersey Stylish</a>
+                                    </h3>
+                                    <span class="price">
+                        <ins>
+                          <span class="amount">$289.00</span>
+                        </ins>
+                      </span>
+                                    <div class="btn-quickview">
+                                        <a href="#" class="btn btn-md btn-color">
+                                            <span>Aperçu</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+        </div>
+    </section> <!-- end trendy products -->
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

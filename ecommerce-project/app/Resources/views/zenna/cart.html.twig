@@ -1,0 +1,145 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}
+    Accueil
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <!-- Cart -->
+    <section class="section-wrap shopping-cart">
+        <div class="container relative">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="table-wrap mb-30">
+                        <table class="shop_table cart table">
+                            <thead>
+                            <tr>
+                                <th class="product-name" colspan="2">Produit</th>
+                                <th class="product-price">Prix</th>
+                                <th class="product-quantity">Quantité</th>
+                                <th class="product-subtotal" colspan="2">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="cart_item">
+                                <td class="product-thumbnail">
+                                    <a href="#">
+                                        <img src="img/shop/shop_item_3.jpg" alt="">
+                                    </a>
+                                </td>
+                                <td class="product-name">
+                                    <a href="#">Fashion Shorts</a>
+                                </td>
+                                <td class="product-price">
+                                    <span class="amount">1250.00 &euro;</span>
+                                </td>
+                                <td class="product-quantity">
+                                    <div class="quantity buttons_added">
+                                        <input disabled type="number" step="1" min="0" value="1" title="Qty" class="input-text qty text">
+                                    </div>
+                                </td>
+                                <td class="product-subtotal">
+                                    <span class="amount">1250.00 &euro;</span>
+                                </td>
+                                <td class="product-remove">
+                                    <a href="#" class="remove" title="Remove this item">
+                                        <i class="ui-close"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr class="cart_item">
+                                <td class="product-thumbnail">
+                                    <a href="#">
+                                        <img src="img/shop/shop_item_7.jpg" alt="">
+                                    </a>
+                                </td>
+                                <td class="product-name">
+                                    <a href="#">Business Suit</a>
+                                </td>
+                                <td class="product-price">
+                                    <span class="amount">240.00 &euro;</span>
+                                </td>
+                                <td class="product-quantity">
+                                    <div class="quantity buttons_added">
+                                        <input disabled type="number" step="1" min="0" value="1" title="Qty" class="input-text qty text">
+                                    </div>
+                                </td>
+                                <td class="product-subtotal">
+                                    <span class="amount">240.00 &euro;</span>
+                                </td>
+                                <td class="product-remove">
+                                    <a href="#" class="remove" title="Remove this item">
+                                        <i class="ui-close"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row mb-50">
+                        <div class="col-xs-12">
+                            <div class="actions">
+                                <div class="wc-proceed-to-checkout">
+                                    <a href="#" class="btn btn-lg btn-dark"><span>Passer la commande</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+            <div class="row">
+                <div class="col-md-offset-6 col-md-6">
+                    <div class="cart_totals">
+                        <h2 class="heading relative bottom-line full-grey uppercase mb-30">Total du Panier</h2>
+
+                        <table class="table shop_table">
+                            <tbody>
+                            <tr class="cart-subtotal">
+                                <th>Sous-total</th>
+                                <td>
+                                    <span class="amount">1490.00 &euro;</span>
+                                </td>
+                            </tr>
+                            <tr class="shipping">
+                                <th>Expédition</th>
+                                <td>
+                                    <span>Gratuite</span>
+                                </td>
+                            </tr>
+                            <tr class="cart-subtotal">
+                                <th>TVA 20%</th>
+                                <td>
+                                    <span class="amount">400.00 &euro;</span>
+                                </td>
+                            </tr>
+                            <tr class="order-total">
+                                <th>Total TTC</th>
+                                <td>
+                                    <strong><span class="amount">2490.00 &euro;</span></strong>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div> <!-- end col cart totals -->
+
+            </div> <!-- end row -->
+
+
+        </div> <!-- end container -->
+    </section> <!-- end cart -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

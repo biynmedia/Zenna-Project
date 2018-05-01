@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03-MISE EN PLACE DU THEME</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="le-templating--symfony-3.4">Le Templating | Symfony 3.4</h1>
+<p>Nous allons mettre en place le thème de notre projet Zenna.<br>
+<strong>Objectif, réaliser notre site e-commerce en 4 scéances !</strong></p>
+<p>Nous utiliserons le moteur de template Twig</p>
+<blockquote>
+<p>Doc de référence :<br>
+<a href="https://symfony.com/doc/3.4/templating.html">https://symfony.com/doc/3.4/templating.html</a><br>
+<a href="https://twig.symfony.com">https://twig.symfony.com</a></p>
+</blockquote>
+<h2 id="présentation-de-twig">Présentation de Twig</h2>
+<p>Les templates vont nous permettre de séparer le code PHP du code HTML/XML/Text, etc. Seulement, pour faire du HTML de présentation, on a toujours besoin d’un peu de code dynamique : faire une boucle pour afficher toutes les annonces de notre plateforme, créer des conditions pour afficher un menu différent pour les utilisateurs authentifiés ou non, etc. Pour faciliter ce code dynamique dans les templates, le moteur de templates Twig offre son pseudo-langage à lui.<br>
+<em>Source : Openclassroom.</em></p>
+<h2 id="mise-en-place-de-twig">Mise en Place de Twig</h2>
+<p><strong>Nous allons maintenant procéder aux étapes suivantes :</strong></p>
+<ul>
+<li>Création de notre structure HTML de base : <strong>base.html.twig</strong> ;</li>
+<li>Hériter du <strong>Controller</strong> Symfony ;</li>
+<li>Créer nos pages : Accueil, Catégorie et Fiche Produit</li>
+</ul>
+<blockquote>
+<p>Doc de Référence<br>
+<a href="https://symfony.com/doc/3.4/controller.html#the-base-controller-classes-services">https://symfony.com/doc/3.4/controller.html#the-base-controller-classes-services</a> et <a href="https://symfony.com/doc/3.4/controller.html#rendering-templates">https://symfony.com/doc/3.4/controller.html#rendering-templates</a></p>
+</blockquote>
+<pre><code>class ZennaController extends Controller
+...
+public function indexAction() {
+    return $this-&gt;render('base.html.twig');
+}
+</code></pre>
+<p>Une fois notre fichier de base mis en place, nous allons mettre en place notre Layout.</p>
+<h2 id="mise-en-place-de-notre-layout">Mise en Place de notre Layout</h2>
+<p>Nous allons mettre en place l’architecture nécessaire au fonctionnement de notre thème Zenna en nous appuyant sur la puissance de Twig :</p>
+<ol>
+<li>Création du Header <strong>_header.html.twig</strong></li>
+<li>Création du Footer <strong>_footer.html.twig</strong></li>
+<li>Création du Panier <strong>_cart.html.twig</strong></li>
+<li>Création du Menu <strong>_nav.html.twig</strong></li>
+<li>Création d’un Layout <strong>layout.html.twig</strong></li>
+<li>Création de notre Page Accueil <strong>index.html.twig</strong></li>
+<li>Création de notre Page Categorie <strong>category.html.twig</strong></li>
+<li>Création de notre Page Produit <strong>product.html.twig</strong></li>
+<li>Création de notre Page Panier <strong>cart.html.twig</strong></li>
+</ol>
+<h3 id="génération-des-urls-">Génération des URLs :</h3>
+<blockquote>
+<p>Doc de Référence : <a href="https://symfony.com/doc/3.4/templating.html#linking-to-pages">https://symfony.com/doc/3.4/templating.html#linking-to-pages</a></p>
+</blockquote>
+<p>Nous allons maintenant mettre en place la navigation inter-pages de notre site.</p>
+<pre><code>&lt;a href="{{ path('zenna_index') }}"&gt;Accueil&lt;/a&gt;
+</code></pre>
+<p>Ici, la fonction <strong>path()</strong> va demander à Symfony de créer une URL relative pour la route index. Le résultat après compilation sera alors :</p>
+<pre><code>&lt;a href="/"&gt;Accueil&lt;/a&gt;
+</code></pre>
+<p>Lorsqu’il y à des paramètres, nous procédons de la façons suivantes :</p>
+<pre><code>&lt;a href="{{ url('zenna_category', { category : 'robes' }) }}"&gt;Robes&lt;/a&gt;
+</code></pre>
+<p>Ce qui donnera :</p>
+<pre><code>&lt;a href="/categorie/robes"&gt;Robes&lt;/a&gt;
+</code></pre>
+<p>Finalisons notre site en créant les différents liens restant.</p>
+<blockquote>
+<p>Pour le moment nous écrivons nos liens en dur, par la suite tout sera automatisé.</p>
+</blockquote>
+<h3 id="générer-le-rendu-dun-contrôleur-depuis-le-template">Générer le rendu d’un contrôleur depuis le template</h3>
+<p>Nous souhaitons afficher un fil d’ariane pour nos utilisateurs.</p>
+<blockquote>
+<p>Doc de Référence : <a href="https://symfony.com/doc/3.4/templating/embedding_controllers.html">https://symfony.com/doc/3.4/templating/embedding_controllers.html</a></p>
+</blockquote>
+<p>Dans certains cas, nous avons besoin d’inclure plus qu’un simple template dans notre vue. Par exemple, dans le cas de notre fil d’ariane, nous auront besoin de d’afficher des informations spécifiques en fonction de la page où se situe notre utilisateur.</p>
+<p>Vous comprenez vite qu’il ne sera pas possible de passer par un simple include, vu que le ou les liens changerons d’une page à un autre…</p>
+<p>La solution est alors la suivante, nous allons inclure dans notre template, le résultat du rendu d’un contrôleur.</p>
+<p>Dans <strong>ZennaController</strong>, créons une fonction <strong>breadcrumbAction()</strong> :</p>
+<pre><code>/**  
+ * Permet l'affichage d'un Fil d'Ariane sur le site 
+ * @return Response  
+ */
+ public function breadcrumbAction($title = "", $links = []) {  
+     return $this-&gt;render('components/_breadcrumb.html.twig', [  
+	     'title' =&gt; $title,  
+	     'links' =&gt; $links  
+     ]);  
+}
+</code></pre>
+<p>Depuis notre <strong>_breadcrumb.html.twig</strong> nous pouvons récupérer les variables :</p>
+<pre><code>{{ dump(title) }}
+{{ dump(links) }}
+</code></pre>
+<p><em>Nous pouvons maintenant faire notre boucle…</em></p>
+<p>Pour afficher ensuite notre fil d’ariane, dans nos vues :</p>
+<pre><code>{{ render(controller('AppBundle:Zenna\\Zenna:breadcrumb', {  
+  'title' : 'Produit',  
+  'links' : [  
+	    { 'title' : 'Pantalon', 'category' : 'pantalon' },  
+   ]
+})) }}
+</code></pre>
+<p>Comprenez ici que symfony va executer la fonction <strong>breadcrumbAction()</strong> de notre <strong>ZennaController</strong>. Nous auront alors le rendu de <strong>_breadcrumb.html.twig</strong> via <strong>breadcrumbAction()</strong> dans notre vue !</p>
+<p>Written with ❤️ by <a href="https://github.com/hugoliegeard">Hugo LIEGEARD</a>.</p>
+</div>
+</body>
+
+</html>

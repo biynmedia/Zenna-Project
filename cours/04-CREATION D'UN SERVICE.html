@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04-CREATION D&#x27;UN SERVICE</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="les-services--symfony-3.4">Les Services | Symfony 3.4</h1>
+<p>Avant d’attaquer directement notre BDD, nous allons dans un premier temps travailler avec des données au format YAML… Vous vous souvenez…</p>
+<blockquote>
+<p>Doc de référence :<br>
+<a href="https://symfony.com/doc/3.4/components/yaml.html">https://symfony.com/doc/3.4/components/yaml.html</a></p>
+</blockquote>
+<p>Plutôt que d’écrire en dur le slider de notre page d’accueil, nous allons mettre ses données dans un fichier YAML qui nous servira de “Base de Données”.</p>
+<h2 id="création-du-fichier-yaml">Création du fichier YAML</h2>
+<p>Installons tout d’abord le composant symfony qui nous permettra de manipuler via PHP nos données YAML.</p>
+<pre><code>composer require symfony/yaml
+</code></pre>
+<p>Puis dans <strong>src/Slider/</strong> créons le fichier <strong>slider.yml</strong><br>
+Nous allons mettre en place nos slides selon le modèle suivant :</p>
+<pre><code> slides:  
+     slide1 : image : 'img/hero/1.jpg'  
+	     title : 'A Summer Story'  
+	     subtitle : 'Le plein de nouveautés !'  
+	     links :  
+		     link1 : 
+			     title : 'Découvrez la campagne'  
+			     href : '#'  
+      slide2...
+      slide3...
+</code></pre>
+<p><em>Créez trois slides pour la démonstration.</em></p>
+<h2 id="création-du-service">Création du Service</h2>
+<p>Mettons ensuite en place le <strong>service symfony</strong> :</p>
+<ul>
+<li>Création du Service :  <code>Slider</code> : *Créez la classe <code>Slider</code> dans <code>src/Slider/Slider.php</code></li>
+<li>Création de la fonction <strong>getSlides()</strong></li>
+</ul>
+<p>Notre version de Symfony, permet le chargement automatique de nos services. Autrement dit, nous n’avons aucune déclaration à faire… Ils sont directement disponible.</p>
+<p><img src="https://github.com/biynmedia/Formation-Symfony/blob/master/LES-FONDAMENTAUX/captures/Autowirable.png?raw=true" alt="enter image description here"></p>
+<p>Testons dans la console :</p>
+<pre><code> php bin/console debug:autowiring
+</code></pre>
+<p>Nous voyons que notre <strong>Slider\Slider</strong> est déjà prêt à être utilisé par symfony !</p>
+<h2 id="utilisation-du-service">Utilisation du Service</h2>
+<blockquote>
+<p>Nous allons maintenant récupérer les slides dans notre contrôleur puis afficher les données sur notre page d’accueil.</p>
+</blockquote>
+<p>La récupération du service est simple et rapide, on injecte le service dans le paramètre de notre fonction, symfony fera le reste :</p>
+<pre><code>public function indexAction(Slider $slider)
+</code></pre>
+<p>Il ne nous reste plus qu’à récupérer les slides et les transmettre à la vue :</p>
+<pre><code># Récupération des Slides  
+$slides = $slider-&gt;getSlides();  
+  
+return $this-&gt;render('zenna/index.html.twig', [  
+  'slides' =&gt; $slides  
+]);
+</code></pre>
+<p><em>NOTA BENE : En déclarant notre service dans services.yml il est possible d’y accéder via le container de symfony.</em></p>
+<blockquote>
+<p>Vous pouvez passer en revue le détails de l’injection de dépendance dans le <strong>PDF SF3C2</strong> à partir de la <strong>Page 3</strong></p>
+</blockquote>
+<h2 id="affichage-dans-le-template">Affichage dans le template</h2>
+<p>Nous pouvons ensuite accéder à nos données directement dans twig.</p>
+<pre><code>{{ dump(slides) }}
+</code></pre>
+<blockquote>
+<p>Il ne reste plus qu’à faire la boucle et le tour est joué !</p>
+</blockquote>
+<p>Written with ❤️ by <a href="https://github.com/hugoliegeard">Hugo LIEGEARD</a>.<br>
+Screenshots 📸 by <a href="https://tool.frogg.fr/">Frogg’s web tools</a>.</p>
+</div>
+</body>
+
+</html>
