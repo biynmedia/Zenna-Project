@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block page_title %}
-    Product
+    {{ product.name }}
 {% endblock %}
 
 {% block stylesheets %}
@@ -10,9 +10,9 @@
 
 {% block breadcrumb %}
     {{ render(controller('AppBundle:Zenna\\Zenna:breadcrumb', {
-        'title' : 'Produit',
+        'title' : product.name,
         'links' : [
-            { 'title' : 'Pantalon', 'category' : 'pantalon' },
+            { 'title' : product.category.name, 'category' : product.category.slug },
         ]
     })) }}
 {% endblock %}
@@ -28,68 +28,34 @@
                     <div class="flickity flickity-slider-wrap mfp-hover" id="gallery-main">
 
                         <div class="gallery-cell">
-                            <a href="{{ asset('img/shop/item_lg_1.jpg') }}" class="lightbox-img">
-                                <img src="{{ asset('img/shop/item_lg_1.jpg') }}" alt="" />
+                            <a href="{{ asset('img/shop/' ~ product.category.slug ~ '/' ~ product.image) }}" class="lightbox-img">
+                                <img src="{{ asset('img/shop/' ~ product.category.slug ~ '/' ~ product.image) }}" alt="" />
                                 <i class="ui-zoom zoom-icon"></i>
                             </a>
                         </div>
-                        <div class="gallery-cell">
-                            <a href="{{ asset('img/shop/item_lg_2.jpg') }}" class="lightbox-img">
-                                <img src="{{ asset('img/shop/item_lg_2.jpg') }}" alt="" />
-                                <i class="ui-zoom zoom-icon"></i>
-                            </a>
-                        </div>
-                        <div class="gallery-cell">
-                            <a href="{{ asset('img/shop/item_lg_3.jpg') }}" class="lightbox-img">
-                                <img src="{{ asset('img/shop/item_lg_3.jpg') }}" alt="" />
-                                <i class="ui-zoom zoom-icon"></i>
-                            </a>
-                        </div>
-                        <div class="gallery-cell">
-                            <a href="{{ asset('img/shop/item_lg_4.jpg') }}" class="lightbox-img">
-                                <img src="{{ asset('img/shop/item_lg_4.jpg') }}" alt="" />
-                                <i class="ui-zoom zoom-icon"></i>
-                            </a>
-                        </div>
-                        <div class="gallery-cell">
-                            <a href="{{ asset('img/shop/item_lg_5.jpg') }}" class="lightbox-img">
-                                <img src="{{ asset('img/shop/item_lg_5.jpg') }}" alt="" />
-                                <i class="ui-zoom zoom-icon"></i>
-                            </a>
-                        </div>
+
                     </div> <!-- end gallery main -->
 
                     <div class="gallery-thumbs">
                         <div class="gallery-cell">
-                            <img src="{{ asset('img/shop/item_thumb_1.jpg') }}" alt="" />
-                        </div>
-                        <div class="gallery-cell">
-                            <img src="{{ asset('img/shop/item_thumb_2.jpg') }}" alt="" />
-                        </div>
-                        <div class="gallery-cell">
-                            <img src="{{ asset('img/shop/item_thumb_3.jpg') }}" alt="" />
-                        </div>
-                        <div class="gallery-cell">
-                            <img src="{{ asset('img/shop/item_thumb_4.jpg') }}" alt="" />
-                        </div>
-                        <div class="gallery-cell">
-                            <img src="{{ asset('img/shop/item_thumb_5.jpg') }}" alt="" />
+                            <img src="{{ asset('img/shop/' ~ product.category.slug ~ '/' ~ product.image) }}" alt="" />
                         </div>
                     </div> <!-- end gallery thumbs -->
 
                 </div> <!-- end col img slider -->
 
                 <div class="col-md-6 col-xs-12 product-description-wrap">
-                    <h1 class="product-title">Robe longue lavallière</h1>
+                    <h1 class="product-title">{{ product.name }}</h1>
                     <span class="price">
                         <ins>
-                          <span class="amount">€35.99</span>
+                          <span class="amount">{{ product.price }} &euro;</span>
                         </ins>
                     </span>
                     <span class="rating">
-                <a href="#">3 Commentaires</a>
               </span>
-                    <p class="short-description">Droit. Tissu fluide. Col en V. Bretelles larges. Nœud à la taille. Élastique à l'arrière. Fentes latérales.</p>
+                    <p class="short-description">
+                        {{ product.intro }}
+                    </p>
 
                     <div class="product-actions">
                         <span>Qté:</span>
@@ -111,8 +77,7 @@
 
 
                     <div class="product_meta">
-                        <span class="sku">REF: <a href="#">21099027</a></span>
-                        <span class="brand_as">Categorie: <a href="#">Robes</a></span>
+                        <span class="brand_as">Categorie: <a href="{{ url('zenna_category', { 'category' : product.category.slug }) }}">{{ product.category.name }}</a></span>
                     </div>
 
                     <!-- Accordion -->
@@ -124,41 +89,14 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    Droit. Tissu fluide. Col en V. Bretelles larges. Nœud à la taille. Élastique à l'arrière. Fentes latérales.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="plus">Information<span>&nbsp;</span>
-                                </a>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <table class="table shop_attributes">
-                                        <tbody>
-                                        <tr>
-                                            <th>Taille:</th>
-                                            <td>EU 41 (US 8), EU 42 (US 9), EU 43 (US 10), EU 45 (US 12)</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Couleurs:</th>
-                                            <td>Violet, Noir, Bleu</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Matière:</th>
-                                            <td>Coton (100%)</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    {{ product.description }}
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="socials-share clearfix">
-                        <span>Share:</span>
+                        <span>Partager :</span>
                         <div class="social-icons nobase">
                             <a href="#"><i class="fa fa-twitter"></i></a>
                             <a href="#"><i class="fa fa-facebook"></i></a>
