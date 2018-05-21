@@ -1,3 +1,8 @@
+customer:
+    resource: "@CustomerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 # : https://symfony.com/doc/3.4/routing.html#loading-routes
 app:
     resource: '@AppBundle/Controller/'
@@ -19,3 +24,6 @@ mentions_legales:
     defaults:
         _controller: FrameworkBundle:Template:template
         template:    static/mentionslegales.html.twig
+
+deconnexion:
+    path: /deconnexion.html

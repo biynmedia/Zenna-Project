@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05-DOCTRINE ET LES ENTITES</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="doctrine--symfony-3">Doctrine | Symfony 3</h1>
+<p>Nous allons commencé à travailler avec notre base de données grâce à Doctrine.</p>
+<blockquote>
+<p>Doc de référence :<br>
+<a href="https://symfony.com/doc/3.4/doctrine.html">https://symfony.com/doc/3.4/doctrine.html</a></p>
+</blockquote>
+<h2 id="présentation-dun-orm">Présentation d’un ORM</h2>
+<p>Un ORM est une classe (ou bien plus souvent un ensemble de classes) visant à ce que l’utilisateur puisse manipuler ses tables de données comme si c’étaient des objets.</p>
+<blockquote>
+<p>Source : <a href="https://openclassrooms.com/courses/utilisation-d-un-orm-les-bases-de-doctrine">https://openclassrooms.com/courses/utilisation-d-un-orm-les-bases-de-doctrine</a></p>
+</blockquote>
+<h2 id="présentation-de-doctrine">Présentation de Doctrine</h2>
+<p>Doctrine est, comme vous devez maintenant vous douter, l’un des ORM les plus connus qui existent actuellement. Il est utilisé dans des frameworks très connus (Symfony, Zend Framework), et est aussi simple à prendre en main que puissant.</p>
+<blockquote>
+<p>Source : <a href="https://openclassrooms.com/courses/utilisation-d-un-orm-les-bases-de-doctrine">https://openclassrooms.com/courses/utilisation-d-un-orm-les-bases-de-doctrine</a></p>
+</blockquote>
+<h2 id="installation-et-configuration-de-doctrine">Installation et Configuration de Doctrine</h2>
+<p>Afin de pouvoir utiliser doctrine, nous allons configurer la connexion à notre base de donnée :</p>
+<pre><code># app/config/parameters.yml
+parameters:
+    database_host:     localhost
+    database_name:     zenna
+    database_user:     root
+    database_password: null
+</code></pre>
+<blockquote>
+<p>N’oubliez pas de créer votre base de données dans PhpMyAdmin…<br>
+Ou via la console : <em>php bin/console doctrine:database:create</em></p>
+</blockquote>
+<p><img src="https://github.com/biynmedia/Zenna-Project/blob/master/cours/captures/01-doctrine-create.JPG?raw=true" alt="enter image description here"></p>
+<p><strong>Nous allons vérifier si notre configuration est correct :</strong></p>
+<pre><code>php bin/console doctrine:schema:validate
+[Mapping]  OK - The mapping files are correct.
+[Database] OK - The database schema is in sync with the mapping files.
+</code></pre>
+<p><img src="https://github.com/biynmedia/Zenna-Project/blob/master/cours/captures/01-doctrine-schema-validate.JPG?raw=true" alt="enter image description here"></p>
+<p><strong>Nous pouvons maintenant créer nos Entités !</strong></p>
+<h2 id="créer-une-entité">Créer une Entité</h2>
+<blockquote>
+<p>Doc de Référence :<br>
+<a href="https://symfony.com/doc/3.4/doctrine.html#creating-an-entity-class">https://symfony.com/doc/3.4/doctrine.html#creating-an-entity-class</a></p>
+</blockquote>
+<p>A partir de maintenant, nous devons réfléchir nos données en tant que classe /objet et ne plus nous occuper de la base de donnée. (Table, Champs, …). On oublie le SQL !</p>
+<p>Pour notre projet nous auront donc besoin de mettre en place une classe pour nos Produits et nos Catégories. Nous verrons pour les utilisateurs par la suite.</p>
+<blockquote>
+<p>NOTA BENE : Symfony via Doctrine se chargera de la création et des updates de notre base de données. De notre côté nous travaillerons uniquement avec nos entités !</p>
+</blockquote>
+<pre><code>php bin/console doctrine:generate:entity
+</code></pre>
+<p><strong>Demandons à Symfony de créer pour nous les Entités (class) Category, et Product :</strong></p>
+<p><img src="https://github.com/biynmedia/Zenna-Project/blob/master/cours/captures/01-doctrine-entity-1.JPG?raw=true" alt=""></p>
+<pre><code>php bin/console doctrine:generate:entity
+</code></pre>
+<p>A partir de là, vous pouvez vous laissez guider…</p>
+<p><strong>Category :</strong></p>
+<ul>
+<li>id</li>
+<li>name</li>
+<li>slug</li>
+</ul>
+<p><img src="https://github.com/biynmedia/Zenna-Project/blob/master/cours/captures/01-doctrine-entity-2.JPG?raw=true" alt=""></p>
+<p>La console de symfony nous permet d’automatiser la création de nos entités…</p>
+<p><img src="https://github.com/biynmedia/Zenna-Project/blob/master/cours/captures/01-doctrine-entity-3.JPG?raw=true" alt=""></p>
+<p>Nous n’avons pas besoin de créer manuellement notre classe PHP !<br>
+Créez autant de champs que nécessaire…</p>
+<p><img src="https://github.com/biynmedia/Zenna-Project/blob/master/cours/captures/01-doctrine-entity-4.JPG?raw=true" alt=""></p>
+<p>On procède de la même façon pour les produits…</p>
+<p><strong>Product:</strong></p>
+<ul>
+<li>id</li>
+<li>name</li>
+<li>slug</li>
+<li>price</li>
+<li>intro</li>
+<li>description</li>
+<li>image</li>
+</ul>
+<p>Une fois nos entités généré, dans <code>src/Entity</code> vous devriez voir nos 2 classes PHP :</p>
+<ol>
+<li>Category</li>
+<li>Product</li>
+</ol>
+<p>Pour chaque propriété, vous verrez une annotation doctrine, qui permet à symfony d’<strong>associer</strong> <em>(mapping)</em> chaque propriété de <strong>notre classe avec une table</strong> de notre base de donnée.<br>
+<img src="https://symfony.com/doc/current/_images/mapping_single_entity.png" alt="enter image description here"></p>
+<blockquote>
+<p>Doc de Référence :<br>
+<a href="https://symfony.com/doc/3.4/doctrine.html#add-mapping-information">https://symfony.com/doc/3.4/doctrine.html#add-mapping-information</a><br>
+<a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/annotations-reference.html">http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/annotations-reference.html</a></p>
+</blockquote>
+<pre><code>/**  
+ * @ORM\Column(name="name", type="string", length=50)  
+ */
+ private $name;
+</code></pre>
+<h3 id="comment-gérer-les-relations-entre-les-tables-">Comment gérer les relations entre les tables ?</h3>
+<p>Il nous faut maintenant pouvoir gérer les relations entre nos tables. Plusieurs produits auront une catégorie, ou inversement, une catégorie aura plusieurs produits. Nous avons donc une relation <strong>ManyToOne</strong> et <strong>OneToMany</strong></p>
+<blockquote>
+<p>Doc de Référence :<br>
+<a href="https://symfony.com/doc/3.4/doctrine/associations.html#relationship-mapping-metadata">https://symfony.com/doc/3.4/doctrine/associations.html#relationship-mapping-metadata</a></p>
+</blockquote>
+<p>Pour mettre en place cette relation qui donnera naissance à une contrainte de clé étrangère nous utilisons toujours les annotations.</p>
+<p><strong>src/Entity/Product</strong> :</p>
+<pre><code>/**  
+ * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")  
+ */
+ private $category;
+</code></pre>
+<p><strong>src/Entity/Category</strong> :</p>
+<pre><code> /**  
+ * @ORM\OneToMany(targetEntity="Product", mappedBy="category")  
+ */
+ private $products;
+
+// ...
+public function __construct()
+{
+    $this-&gt;products = new ArrayCollection();
+}
+</code></pre>
+<p>Grâce aux annotations, nous venons d’indiquer à Doctrine d’associer chaque produit à une catégorie, et une catégorie à chaque produit.</p>
+<blockquote>
+<p>NOTA BENE :  Remarquez l’initialisation de products en tant que ArrayCollection.</p>
+</blockquote>
+<p>Nous pouvons vérifier la validité de nos relations :</p>
+<pre><code>php bin/console doctrine:schema:validate
+[Mapping]  OK - The mapping files are correct.
+[Database] FAIL - The database schema is not in sync with the current mapping file.
+</code></pre>
+<p>Le FAIL est normal, nous n’avons pas encore sauvegarder nos modifications en BDD.<br>
+En option :</p>
+<pre><code>php bin/console doctrine:mapping:info
+Found 2 mapped entities:
+[OK]   AppBundle\Entity\Category
+[OK]   AppBundle\Entity\Product
+</code></pre>
+<p><img src="https://github.com/biynmedia/Zenna-Project/blob/master/cours/captures/01-doctrine-mapping-info.JPG?raw=true" alt="enter image description here"></p>
+<p>Nous allons ensuite demandé à Doctrine, via Symfony de créer nos tables. Dans la console :</p>
+<pre><code>php bin/console doctrine:schema:update --force
+</code></pre>
+<p>Grâce à cette commande, doctrine va automatiquement comparer notre base de donnée avec nos entités et executer le code SQL qui convient.</p>
+<p><img src="https://github.com/biynmedia/Zenna-Project/blob/master/cours/captures/01-doctrine-schema-update.JPG?raw=true" alt=""></p>
+<p>Maintenant, vous pouvez jeter un oeil dans votre BDD, vous allez voir que Doctrine à générer absolument tous pour vous ! Tables, Colonnes, Contraintes, …</p>
+<blockquote>
+<p>Importer les données exemple SQL.</p>
+</blockquote>
+<h2 id="afficher-les-informations">Afficher les informations</h2>
+<p>Nous allons maintenant mettre en place notre :</p>
+<ul>
+<li>Page d’Accueil</li>
+<li>Page Catégorie</li>
+<li>Page Produit</li>
+</ul>
+<h3 id="la-page-daccueil">La Page d’Accueil</h3>
+<p>Nous souhaitons afficher les 8 dernières nouveautés sur notre page d’accueil.<br>
+Nous allons devoir donc, créer notre propre fonction.</p>
+<p>Pour cela, nous allons aller dans <code>src/Repository/ProductRepository</code><br>
+Créons la fonction suivante :</p>
+<pre><code>/**  
+ * Récupère et retourne les nouveautés. 
+ * @return array  
+ */
+public function findLastEightProducts()  
+{  
+  return $this-&gt;createQueryBuilder('p')  
+     -&gt;orderBy('p.id', 'DESC')  
+     -&gt;setMaxResults(8)  
+     -&gt;getQuery()  
+     -&gt;getResult()  
+  ;  
+}
+</code></pre>
+<p>Dans notre exemple, nous utilisons le <a href="https://symfony.com/doc/3.4/doctrine.html#querying-for-objects-using-doctrine-s-query-builder">QueryBuilder</a> pour intéroger notre base de donnée. Nous pourrions aussi utiliser d’autres méthodes, comme le <a href="https://symfony.com/doc/3.4/doctrine.html#querying-for-objects-with-dql">DQL</a></p>
+<p>Allons ensuite dans <strong>ZennaController</strong> pour mettre à jour notre fonction <strong>index()</strong> :</p>
+<ol>
+<li>On récupère via le repository les nouveautés</li>
+<li>On transmet à la vue les produits</li>
+</ol>
+<p>Exemple :</p>
+<pre><code># Récupération des 8 dernières nouveautés  
+$products = $this-&gt;getDoctrine()
+    -&gt;getRepository(Product::class)  
+    -&gt;findLastEightProducts();
+// ---
+return $this-&gt;render('zenna/index.html.twig', [  
+  'products' =&gt; $products  
+]);
+</code></pre>
+<p>Dans notre vue <code>zenna/index</code> , dans notre block <em>“content”</em> :</p>
+<pre><code>{{ dump(products) }}
+</code></pre>
+<p>Pour accéder à la catégorie, doctrine se charge de faire silencieusement une requête et récupérer les informations <em>( Lazy Loading )</em> :</p>
+<pre><code>{{ dump(product.category.name) }}
+</code></pre>
+<blockquote>
+<p>Il ne nous reste plus qu’à faire la boucle.</p>
+</blockquote>
+<h3 id="la-page-catégorie">La Page Catégorie</h3>
+<p>Nous souhaitons afficher la liste des produits d’une catégorie.<br>
+Nous allons ici procéder en 2 étapes :</p>
+<ol>
+<li>Récupérer la catégorie</li>
+<li>Récupérer les articles de la catégorie</li>
+</ol>
+<p>Dans <code>ZennaController::categoryAction()</code>, nous allons récupérer la catégorie :</p>
+<pre><code># Récupération de la Catégorie  
+$category = $this-&gt;getDoctrine()  
+    -&gt;getRepository(Category::class)  
+    -&gt;findOneBy(['slug' =&gt; $category]);
+</code></pre>
+<p>Puis, grâce à notre association, nous laissons à symfony le soin d’aller récupérer les produits pour nous :</p>
+<pre><code># Récupération des produits de la catégorie  
+$products = $category-&gt;getProducts();
+</code></pre>
+<blockquote>
+<p>Il ne reste plus qu’à passer les produits à la vue et à faire notre boucle.</p>
+</blockquote>
+<h3 id="la-page-produits">La Page Produits</h3>
+<p>Enfin, la dernière page de notre site. Nous voulons ici, afficher la fiche descriptive d’un produit.<br>
+Dans <code>ZennaController::productAction()</code> :</p>
+<pre><code># Récupération avec Doctrine  
+$product = $this-&gt;getDoctrine() -&gt;getRepository(Product::class) -&gt;find($id); 
+
+# Si aucun produit n'est trouvé...  
+if (!$product) {  
+    
+    # On génère une exception 
+    throw $this-&gt;createNotFoundException( 'Nous n\'avons pas trouvé votre produit ID : '.$id ); 
+     
+    # Ou on peut aussi rediriger l'utilisateur sur la page index. 
+    # return $this-&gt;redirectToRoute('zenna_index',[],Response::HTTP_MOVED_PERMANENTLY);
+}
+</code></pre>
+<h3 id="chargement-automatique-des-objets">Chargement Automatique des Objets</h3>
+<blockquote>
+<p>Doc de Référence : <a href="https://symfony.com/doc/3.4/doctrine.html#automatically-fetching-objects-paramconverter">https://symfony.com/doc/3.4/doctrine.html#automatically-fetching-objects-paramconverter</a></p>
+</blockquote>
+<h4 id="avant">Avant</h4>
+<p>Supposons la route :</p>
+<pre><code>/{category}/{slug}_{id}.html
+</code></pre>
+<p>Nous récupérons dans notre contrôleur les paramètres comme-ci :</p>
+<pre><code>public function productAction($id, $category, $slug)
+</code></pre>
+<p>Nous faisons ensuite notre requête en récupération comme vue plus haut.</p>
+<h4 id="après">Après</h4>
+<p>Ce que nous pouvons faire, c’est directement dans notre contrôleur injecté notre Objet Produit ! Symfony se chargera alors grâce à l’id présent dans la route de retourner à notre contrôleur l’objet de Produit !</p>
+<pre><code>public function productAction(Product $product)
+</code></pre>
+<p>Autrement dit, cette fonctionnalité de <strong>SensioFrameworkExtraBundle</strong> permettra à symfony de convertir AUTOMATIQUEMENT votre paramètre <strong>id</strong> en objet.</p>
+<blockquote>
+<p>Essayez…</p>
+</blockquote>
+<p>Written with ❤️ by <a href="https://github.com/hugoliegeard">Hugo LIEGEARD</a>.<br>
+Screenshots 📸 by <a href="https://github.com/hugoliegeard">Hugo LIEGEARD</a>.</p>
+</div>
+</body>
+
+</html>

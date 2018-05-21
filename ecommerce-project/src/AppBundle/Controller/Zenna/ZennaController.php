@@ -29,7 +29,7 @@ class ZennaController extends Controller
         # Récupération des 8 dernières nouveautés
         $products = $this->getDoctrine()
             ->getRepository(Product::class)
-            ->findLastProducts();
+            ->findLastEightProducts();
         # dump($products);
 
         # return new Response("<html><body><h1>PAGE D'ACCUEIL</h1></body></html>");
